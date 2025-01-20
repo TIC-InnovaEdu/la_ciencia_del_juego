@@ -1,0 +1,60 @@
+@startuml
+
+' hide the spot
+'hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Docente" as doce{
+    *id_docente: number
+    --
+    *nombre : text
+    *apellido : text
+    *correo_electronico: text
+    *contraseña: text
+
+}
+
+entity "Juego" as juego{
+    *id_juego: number
+    --
+    *nombre : text
+    *descripcion : text
+    
+}
+
+entity "Pregunta" as preg{
+    *id_pregunta: number
+    --
+    *enunciado : text
+    *respuesta_correcta : text
+    id_juego : number <<FK>>
+}
+
+entity "Progreso_Juego" as prog{
+    *id_progreso: number
+    --
+    *puntos_obtenidos : number
+    *id_juego : number <<FK>>
+}
+
+entity "Moneda" as mon{
+    *id_moneda: number
+    --
+    *color : text
+    *tipo : boolean
+    *id_pregunta : number <<FK>>
+    
+}
+
+doce}|..||juego
+juego||..o{preg
+preg||..||mon
+prog||..||juego
+
+
+
+
+@enduml
+
