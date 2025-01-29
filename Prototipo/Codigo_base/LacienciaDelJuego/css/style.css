@@ -1,0 +1,271 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper,
+.content {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.content {
+  overflow-x: hidden;
+}
+
+.content .section {
+  width: 100%;
+  height: 100vh;
+}
+
+.content .section.hero {
+  background-image: url(https://1.bp.blogspot.com/-CBSM8jTWmIU/YJ1TpNVZS4I/AAAAAAAAIg4/Lqzh4EKai5MvkEbxb2w9Qc4niM7yltyxQCNcBGAsYHQ/s2048/ciencias+naturales.png);
+  background-position: center center;
+  background-repeat: repeat;
+  background-size: cover;
+}
+
+.image-container {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  perspective: 500px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+
+.content .section.gradient-blue {
+  background-image: url('https://static.vecteezy.com/system/resources/previews/007/059/448/original/panoramic-green-background-texture-blackboard-vector.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white; 
+  
+}
+
+
+.content .section.gradient-blue .new-layout {
+  background: rgba(0, 0, 0, 0.993); 
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.info-title {
+  font-size: 30px;
+  color: #ffffff;
+  margin-left: 100px;
+}
+
+.aligned-columns {
+  display: flex;
+  justify-content: space-around; /* Asegura que cada conjunto esté bien espaciado */
+  align-items: center;
+  width: 100%;
+  margin-top: 0px;
+}
+
+.column-set {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra las columnas verticalmente */
+ 
+}
+
+.column1, .column {
+  width: 100%;
+  text-align: center;
+  margin-top: -50px;
+  color: black;
+  font-family : "Times New Roman", Times, serif;
+  flex: 2;
+}
+
+.column-image {
+  width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: auto;
+  margin-top: 50px; /* Espacio entre la columna y la imagen */
+  margin-bottom: 100px; /* Espacio entre la imagen y el texto o botón */
+  
+}
+
+.column1 {
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #45e281, #e2e612);
+  padding: 10px;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(224, 189, 189, 0.1);
+  max-width: 55%;
+  min-width: 150px;
+}
+
+.column {
+  background: linear-gradient(135deg, #45e281, #e2e612);
+  padding: 60px;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(224, 189, 189, 0.1);
+  max-width: 90%;
+  min-width: 1px;
+}
+
+.column-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #45e281;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  max-width: 80%; /* Asegura que el botón esté dentro de la misma anchura que las columnas */
+  margin-top: 40px;
+}
+
+.column-button1 {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #45e281;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  max-width: 80%; /* Asegura que el botón esté dentro de la misma anchura que las columnas */
+  margin-top: 40px;
+}
+
+
+.column-button:hover {
+  background-color: #3cb371;
+}
+
+.column-button1:hover {
+  background-color: #3cb371;
+}
+
+.content .section.gradient-blue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.team-info {
+  background-image: url('https://schillings.com/wp-content/uploads/CoffeeBrownGranite2x1.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgb(196, 192, 192);
+  padding: 15px;
+  text-align: left;
+}
+
+.team-info h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.team-info p {
+  padding-block: 10px;
+  font-size: 1rem;
+  margin: 10px 5;
+  padding-left: 10px;
+}
+
+.team-members {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.team-member {
+  text-align: center;
+  margin: 0 15px;
+}
+
+.team-member img {
+  border-radius: 50%;
+  width: 50px;
+  height: 59px;
+}
+
+.team-member p {
+  margin: 25px 0 0 25px;
+  color: #eaff00;
+}
+
+.quote-section {
+  margin: 30px;
+  padding: 0%;
+  margin-block: unset;
+}
+
+.quote-section .image {
+  flex: 1;
+  padding: -10px;
+}
+
+.quote-section .image img {
+  width: 80%;
+  height: auto;
+  padding-left: 160px;
+  border-radius: 30px;
+  flex-wrap: wrap;
+}
+
+.quote-section .text {
+  font-family: "Times New Roman", Times, serif;
+  flex: 2;
+}
+
+.quote-section .text h2 {
+  padding-left: 250px;
+  font-size: 50px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.quote-section .text p {
+  padding-left: 240px;
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.new-layout {
+  display: contents;
+  padding: 10px;
+}
+
+.quote-section {
+  flex: 2;
+  display: flex;
+  padding: 2px;
+  justify-content: center;
+  font-size: 24px;
+}
