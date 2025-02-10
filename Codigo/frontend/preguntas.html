@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Preguntas</title>
+    <link rel="stylesheet" href="css/preguntas.css">
+    <meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com https://fonts.googleapis.com;">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Monomaniac+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <button onclick="window.history.back()">ATRÁS</button>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <form id="question-form">
+                <div class="question-container">
+                    <label for="question">Pregunta:</label>
+                    <input type="text" id="question" required>
+                </div>
+    
+                <fieldset>
+                    <legend>Opciones</legend>
+                    <div class="option-container">
+                        <label for="option1">Opción A:</label>
+                        <input type="text" id="option1" class="option" required>
+                        <input type="checkbox" id="correct1"> Correcta
+                    </div>
+                    <div class="option-container">
+                        <label for="option2">Opción B:</label>
+                        <input type="text" id="option2" class="option" required>
+                        <input type="checkbox" id="correct2"> Correcta
+                    </div>
+                    <div class="option-container">
+                        <label for="option3">Opción C:</label>
+                        <input type="text" id="option3" class="option" required>
+                        <input type="checkbox" id="correct3"> Correcta
+                    </div>
+                    <div class="option-container">
+                        <label for="option4">Opción D:</label>
+                        <input type="text" id="option4" class="option" required>
+                        <input type="checkbox" id="correct4"> Correcta
+                    </div>
+                </fieldset>
+    
+                <button onclick="crearPreguntas()">Crear Pregunta</button>
+                
+            </form>
+        </div>
+    
+        <div class="container">
+            <h2>Preguntas Ingresadas</h2>
+            <ul id="question-list"></ul>
+        </div>   
+    </div>
+
+    <script src="js/preguntas.js"></script>
+</body>
+</html>

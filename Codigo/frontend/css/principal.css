@@ -1,0 +1,108 @@
+.wrapper,
+.content {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.content {
+    overflow-x: hidden;
+}
+  
+.content .section {
+    width: 100%;
+    height: 100vh;
+}
+  
+.content .section.hero {
+    background-image: url(https://1.bp.blogspot.com/-CBSM8jTWmIU/YJ1TpNVZS4I/AAAAAAAAIg4/Lqzh4EKai5MvkEbxb2w9Qc4niM7yltyxQCNcBGAsYHQ/s2048/ciencias+naturales.png);
+    background-position: center center;
+    background-repeat: repeat;
+    background-size: cover;
+}
+  
+.image-container {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    perspective: 500px;
+    overflow: hidden;
+}
+  
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+  
+  
+.content .section.gradient-blue {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/007/059/448/original/panoramic-green-background-texture-blackboard-vector.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white; 
+}
+  
+  
+.content .section.gradient-blue .new-layout {
+    background: rgba(0, 0, 0, 0.993); 
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.quote-section {
+margin: 30px;
+padding: 0%;
+margin-block: unset;
+}
+  
+.quote-section .image {
+    flex: 1;
+    padding: -10px;
+}
+  
+.quote-section .image img {
+    width: 80%;
+    height: auto;
+    padding-left: 160px;
+    border-radius: 30px;
+    flex-wrap: wrap;
+}
+  
+.quote-section .text {
+    font-family: "Times New Roman", Times, serif;
+    flex: 2;
+}
+  
+.quote-section .text h2 {
+    padding-left: 250px;
+    font-size: 50px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+  
+.quote-section .text p {
+    padding-left: 240px;
+    font-size: 28px;
+    color: #ffffff;
+}
+
+.new-layout {
+    display: contents;
+    padding: 10px;
+}
+  
+.quote-section {
+    flex: 2;
+    display: flex;
+    padding: 2px;
+    justify-content: center;
+    font-size: 24px;
+}

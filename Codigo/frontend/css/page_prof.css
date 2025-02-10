@@ -1,0 +1,143 @@
+/* Fuente Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Imagen de fondo corregida */
+body {
+    background: url('../img/plus.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+/* Barra superior con color azul sólido */
+.barra {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: #583a1a; /* Color azul sólido */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    letter-spacing: 1px;
+    animation: cambiarColorTexto 6s ease-in-out infinite; /* Animación para el color del texto */
+}
+
+/* Animación de cambio de color de texto */
+@keyframes cambiarColorTexto {
+    0% { color: #FF4500; } /* Naranja */
+    25% { color: #32CD32; } /* Verde */
+    50% { color: #FF0000; } /* Rojo */
+    75% { color: #FFD700; } /* Amarillo */
+    100% { color: #D8BFD8; } /* Lila */
+}
+
+/* Logo */
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    transition: transform 0.8s ease;
+}
+
+.logo img {
+    max-width: 180px;
+    height: auto;
+    display: block;
+}
+
+.logo:hover img {
+    transform: scale(1.05);
+}
+
+/* Contenedor del formulario */
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 380px;
+    width: 100%;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Estilos de los formularios */
+h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #218838;
+}
+
+p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+a {
+    color: #41a649;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Ocultar el formulario de registro por defecto */
+.hidden {
+    display: none;
+}

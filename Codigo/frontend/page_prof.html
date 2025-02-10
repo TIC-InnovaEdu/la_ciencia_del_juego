@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login y Registro</title>
+    <link rel="stylesheet" href="css/page_prof.css">
+</head>
+<body background="img/plus.jpg" >
+    <div class="barra">La ciencia del juego</div> <!-- Barra encima de la imagen -->
+    
+    <div class="logo">
+        <img src="img/UPS.webp" alt="Universidad Politécnica Salesiana">
+    </div>
+
+    <div class="container">
+        <div class="form-container" id="login-container">
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Correo Electrónico" required>
+                <input type="password" id="login-password" placeholder="Contraseña" required>
+                <button type="submit">Ingresar</button>
+            </form>
+            <p>¿No tienes una cuenta? <a href="#" id="show-register">Regístrate</a></p>
+        </div>
+        
+        <div class="form-container hidden" id="register-container">
+            <h2>Registro de Profesor</h2>
+            <form id="register-form">
+                <input type="text" id="register-name" placeholder="Nombre" required>
+                <input type="text" id="register-lastname" placeholder="Apellido" required>
+                <input type="email" id="register-email" placeholder="Correo Electrónico" required>
+                <input type="password" id="register-password" placeholder="Contraseña" required>
+                <button type="submit">Registrar</button>
+            </form>
+            <p>¿Ya tienes una cuenta? <a href="#" id="show-login">Inicia Sesión</a></p>
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+    <script>
+        function redirectToMaster() {
+            //Redirigir a otra página después de cerrar el modal
+            window.location.href = "preguntas.html"; 
+        }
+   </script>
+</body>
+</html>

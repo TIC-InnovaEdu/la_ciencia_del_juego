@@ -1,0 +1,184 @@
+body {
+    font-family: 'Josefin Sans', serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background: #7C4D37;
+    color: white;
+    padding: 10px;
+}
+
+header button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.main-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+}
+
+.container {
+    background: #468c48;
+    color: white;
+    /* margin: 20px auto; */
+    padding: 20px;
+    width: 48%;
+    border-radius: 8px;
+    border: 2px solid white;
+}
+
+h2 {
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 70%;
+}
+
+.question-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.question-item {    
+    background-color: #d10bdf00;
+    border: 2px solid #b85828f6;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.question-item h3 {
+    margin: 0 0 10px 0;
+}
+
+.question-item .options {
+    margin: 10px 0;
+}
+
+.question-item .option {
+    margin-bottom: 5px;
+}
+
+.question-item button {
+    margin-right: 10px;
+}
+
+.option-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.option-container label {
+    width: 15%;
+    text-align: right;
+}
+
+.option-container input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.option-container input[type="radio"] {
+    transform: scale(1.2);
+}
+
+button {
+    font-family: 'Josefin Sans', serif;
+    margin-top: 15px;
+    padding: 10px;
+    background: #81C784;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button, .container, li {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    border-radius: 10px;  /* Bordes redondeados para un look más orgánico */
+}
+
+button:hover {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Más sombra al hacer hover */
+    background: #66BB6A; /* Verde más brillante */
+    transform: scale(1.05);  /* Aumento suave de tamaño */
+}
+
+/* Estilo para los botones de "Editar" y "Eliminar" */
+.edit-btn, .delete-btn {
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    background: #FFC107; /* Naranja para editar */
+    transform: scale(1.05);  /* Aumento suave de tamaño */
+}
+
+.delete-btn:hover {
+    background: #D32F2F; /* Rojo para eliminar */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: white;
+    color: black;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    position: relative;
+}
+
+li button {
+    margin-left: 10px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.edit-btn {
+    background: #FFC107;
+    color: black;
+}
+
+.delete-btn {
+    background: #D32F2F;
+    color: white;
+}

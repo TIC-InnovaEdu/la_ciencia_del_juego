@@ -1,0 +1,92 @@
+/* Estilo básico para la página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Ajustes del logo */
+.logo img {
+    max-height: 70px; /* Ajusta el tamaño de la imagen */
+    width: auto; /* Mantiene la proporción */
+    display: block;
+}
+
+/* Barra de navegación */
+nav {
+    background-color: #3c8932;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    align-items: center;
+}
+
+nav .logo h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+nav .nav-links li {
+    margin-left: 2rem;
+}
+
+nav .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav .nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Icono del menú para pantallas pequeñas */
+nav .menu-icon {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Sección principal */
+.main-content {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.main-content h2 {
+    font-size: 36px;
+    color: #090909;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+    nav .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #3c8932;
+    }
+
+    nav .nav-links li {
+        margin: 1rem 0;
+    }
+
+    nav .menu-icon {
+        display: block;
+    }
+
+    nav .nav-links.active {
+        display: flex;
+    }
+}
