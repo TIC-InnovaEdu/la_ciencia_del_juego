@@ -1,4 +1,3 @@
-
 var config = {
     type: Phaser.AUTO,
     width: 1200,
@@ -27,8 +26,9 @@ var gameOver = false;
 var cursors1, cursors2;
 var game = new Phaser.Game(config);
 var player1, player2, platforms, stars, bombs;
-let questions = [];
 var questionText, questionNumberText, scoreText1, scoreText2;
+
+let questions = [];
 let answerText;
 let currentQuestionIndex = 0;
 let shuffledQuestions = []; // Esta variable almacenará las preguntas obtenidas
@@ -48,11 +48,7 @@ function preload() {
     this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 }
 
-function create() {
-    // Aseguramos que los textos se creen antes de usarlos
-    questionText = this.add.text(400, 100, '', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
-    answerText = this.add.text(400, 200, '', { fontSize: '20px', fill: '#fff' }).setOrigin(0.5);
-    
+function create() {    
     // Fondo
     this.add.image(600, 300, 'sky').setDisplaySize(1200, 600); // Asegúrate de que cubra toda la pantalla
 
@@ -71,7 +67,7 @@ function create() {
     player1.setBounce(0.2);
 
     // Jugador 2
-    player2 = this.physics.add.sprite(300, 400, 'dude');
+    player2 = this.physics.add.sprite(1050, 400, 'dude');
     player2.setCollideWorldBounds(true);
     player2.setBounce(0.2);
 
@@ -127,12 +123,12 @@ function create() {
     });
 
     // Ocultar el texto de la pregunta principal
-    // questionText = this.add.text(16, 40, "", {
-    //     fontSize: '18px',
-    //     fill: '#fff',
-    //     fontFamily: 'Arial',
-    //     wordWrap: { width: 1168, useAdvancedWrap: true }
-    // });
+    questionText = this.add.text(16, 40, "", {
+        fontSize: '18px',
+        fill: '#fff',
+        fontFamily: 'Arial',
+        wordWrap: { width: 1168, useAdvancedWrap: true }
+    });
 
     // Estrellas
     stars = this.physics.add.group();
@@ -365,7 +361,7 @@ function resetPlayerPosition(player) {
     if (player === player1) {
         player.setPosition(100, 400); // Posición inicial del jugador 1
     } else if (player === player2) {
-        player.setPosition(300, 400); // Posición inicial del jugador 2
+        player.setPosition(1050, 400); // Posición inicial del jugador 2
     }
 }
 
