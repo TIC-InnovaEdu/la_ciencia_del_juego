@@ -1,6 +1,7 @@
+CSS
 /* Estilo básico para la página */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -8,8 +9,8 @@ body {
 
 /* Ajustes del logo */
 .logo img {
-    max-height: 70px; /* Ajusta el tamaño de la imagen */
-    width: auto; /* Mantiene la proporción */
+    max-height: 70px;
+    width: auto;
     display: block;
 }
 
@@ -23,11 +24,6 @@ nav {
     align-items: center;
 }
 
-nav .logo h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
 nav .nav-links {
     list-style: none;
     display: flex;
@@ -39,6 +35,7 @@ nav .nav-links li {
 }
 
 nav .nav-links a {
+    font-family: 'Poppins', sans-serif;
     color: #fff;
     text-decoration: none;
     font-size: 18px;
@@ -57,13 +54,46 @@ nav .menu-icon {
 
 /* Sección principal */
 .main-content {
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     padding: 4rem 2rem;
+    background: white;
+    border: 3px solid #3c8932;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 2rem auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .main-content h2 {
     font-size: 36px;
     color: #090909;
+}
+
+/* Botón de jugar */
+.play-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3c8932;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 25px;
+    border-radius: 50px;
+    transition: transform 0.2s, background-color 0.2s;
+    margin-top: 20px;
+}
+
+.play-button span {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    background-color: #2f6d29;
 }
 
 /* Estilos para pantallas pequeñas */
@@ -88,5 +118,10 @@ nav .menu-icon {
 
     nav .nav-links.active {
         display: flex;
+    }
+
+    .main-content {
+        max-width: 80%;
+        padding: 3rem;
     }
 }

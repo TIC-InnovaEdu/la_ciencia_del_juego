@@ -1,3 +1,4 @@
+
 var config = {
     type: Phaser.AUTO,
     width: 1200,
@@ -26,26 +27,18 @@ var gameOver = false;
 var cursors1, cursors2;
 var game = new Phaser.Game(config);
 var player1, player2, platforms, stars, bombs;
+let questions = [];
 var questionText, questionNumberText, scoreText1, scoreText2;
-var currentQuestionIndex = 0;
-var questions = [
-    { question: "Los suelos arcillosos retienen el agua formando charcos?", answer: "yes" },
-    { question: "Existen cinco clasificaciones de suelo?", answer: "no" },
-    { question: "Los cambisoles son suelos jóvenes con acumulación de arcilla?", answer: "yes" },
-    { question: "Las plantas no necesitan de un suelo fértil?", answer: "no" },
-    { question: "Materia orgánica viene de restos de plantas y animales muertos?", answer: "yes" },
-    { question: "Las plantas solo tienen tallos y raíces?", answer: "no" },
-    { question: "El tallo es el órgano fundamental de todas las plantas?", answer: "no" },
-    { question: "Las plantas producen carbohidratos para crecer?", answer: "yes" },
-    { question: "Las plantas no enfrentan problemas ambientales por el ser humano?", answer: "no" },
-    { question: "Las plantas pertenecen al reino vegetal (Phylum Plantae)?", answer: "yes" }
-];
-var shuffledQuestions;
+let answerText;
+let currentQuestionIndex = 0;
+let shuffledQuestions = []; // Esta variable almacenará las preguntas obtenidas
+
+// Aquí las preguntas se cargan desde el archivo preguntas.js
 var gameOverImage, darkOverlay, restartButton;
 var bombCount = 1; // Contador de bombas
 
 function preload() {
-    this.load.image('sky', 'assets/sky.jpeg'); // Asegúrate de que esta imagen cubra todo el fondo
+    this.load.image('sky', 'assets/sky.jpeg');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('yesStar', 'assets/yesStar.png');
     this.load.image('noStar', 'assets/noStar.png');
@@ -53,11 +46,13 @@ function preload() {
     this.load.image('restartButton', 'assets/restartButton.png');
     this.load.image('gameOverImage', 'assets/gameOver.gif');
     this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-
-    
 }
 
 function create() {
+    // Aseguramos que los textos se creen antes de usarlos
+    questionText = this.add.text(400, 100, '', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
+    answerText = this.add.text(400, 200, '', { fontSize: '20px', fill: '#fff' }).setOrigin(0.5);
+    
     // Fondo
     this.add.image(600, 300, 'sky').setDisplaySize(1200, 600); // Asegúrate de que cubra toda la pantalla
 
@@ -108,23 +103,7 @@ function create() {
         left: Phaser.Input.Keyboard.KeyCodes.A,
         right: Phaser.Input.Keyboard.KeyCodes.D,
         up: Phaser.Input.Keyboard.KeyCodes.W
-    }); // Controles del jugador 2
-
-    // Preguntas y puntaje
-    //Questions = Phaser.Utils.Array.Shuffle(questions);
-
-    //questionNumberText = this.add.text(16, 10, "Pregunta 1:", {
-        //fontSize: '20px',
-        //fill: '#fff',
-        //fontFamily: 'Arial'
-    //});
-
-    //questionText = this.add.text(16, 40, shuffledQuestions[currentQuestionIndex].question, {
-        //fontSize: '18px',
-        //fill: '#fff',
-        //fontFamily: 'Arial',
-        //wordWrap: { width: 1168, useAdvancedWrap: true }
-    //});
+    });
 
     scoreText1 = this.add.text(1000, 10, "Puntaje Jugador 1: 0", {
         fontSize: '20px',
@@ -148,12 +127,12 @@ function create() {
     });
 
     // Ocultar el texto de la pregunta principal
-    questionText = this.add.text(16, 40, "", {
-        fontSize: '18px',
-        fill: '#fff',
-        fontFamily: 'Arial',
-        wordWrap: { width: 1168, useAdvancedWrap: true }
-    });
+    // questionText = this.add.text(16, 40, "", {
+    //     fontSize: '18px',
+    //     fill: '#fff',
+    //     fontFamily: 'Arial',
+    //     wordWrap: { width: 1168, useAdvancedWrap: true }
+    // });
 
     // Estrellas
     stars = this.physics.add.group();
@@ -169,6 +148,8 @@ function create() {
     this.physics.add.collider(bombs, platforms);
     this.physics.add.overlap(player1, bombs, hitBomb, null, this);
     this.physics.add.overlap(player2, bombs, hitBomb, null, this);
+
+    loadQuestions.call(this);
 }
 
 function update() {
@@ -227,112 +208,156 @@ function createStars() {
 }
 
 function createBomb() {
-    for (let i = 0; i < bombCount; i++) { // Crea el número de bombas basado en bombCount
-        var bombX = Phaser.Math.Between(100, 1100);
-        var bomb = bombs.create(bombX, 0, 'bomb');
-        bomb.setBounce(1); // Ajusta el rebote de la bomba
-        bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    if (bombs.countActive(true) < 6) { // Verifica si hay menos de 5 bombas activas
+        for (let i = 0; i < bombCount; i++) {
+            if (bombs.countActive(true) < 6) { // Vuelve a verificar dentro del bucle
+                var bombX = Phaser.Math.Between(100, 1100);
+                var bomb = bombs.create(bombX, 0, 'bomb');
+                bomb.setBounce(1);
+                bomb.setCollideWorldBounds(true);
+                bomb.setVelocity(Phaser.Math.Between(-100, 100), 20);
+            }
+        }
     }
-}
-
-function collectStar(player, star) {
-    star.disableBody(true, true);
-    pauseGameAndShowQuestion(this, player); // Pasa el jugador a la función
 }
 
 function hitBomb(player) {
     showGameOver(this, "¡Golpeaste una bomba!");
 }
 
+let keyboardActive = true;  // Variable de control para saber si el teclado está activo
+
+// Función para cargar las preguntas desde el servidor
+function loadQuestions() {
+    fetch('/preguntas')
+        .then(response => response.json())
+        .then(data => {
+            shuffledQuestions = Phaser.Utils.Array.Shuffle(data);  // Mezclar las preguntas
+            console.log(shuffledQuestions);
+        })
+        .catch(error => {
+            console.error("Error al cargar las preguntas:", error);
+        });
+}
+
 function pauseGameAndShowQuestion(scene, player) {
-    scene.physics.pause();
-    questionContainer = scene.add.rectangle(600, 150, 600, 900, 0x000000, 0.7);
+    if (shuffledQuestions.length === 0) {
+        console.log("No se han cargado preguntas aún.");
+        return;
+    }
+
+    //console.log(shuffledQuestions[0]);
+
+    scene.physics.pause();  // Pausar el juego
+
+    // Crear un contenedor para la pregunta
+    questionContainer = scene.add.rectangle(600, 150, 600, 900, 0x000000, 0.7);  // Fondo de la ventana
 
     // Obtener la pregunta actual
     var currentQuestion = shuffledQuestions[currentQuestionIndex];
 
+    console.log("Pregunta actual:", currentQuestion); // Debugging
+
+    // Verificar que la pregunta tenga la respuesta correcta
+    if (!currentQuestion || !currentQuestion.answer) {
+        console.error("La pregunta no tiene una respuesta correcta definida.");
+        return;
+    }
+
     // Mostrar la pregunta
-    var questionText = scene.add.text(350, 175, currentQuestion.question, { // Ajuste vertical
+    var questionText = scene.add.text(350, 175, currentQuestion.question, {
         fontSize: '20px',
         fill: '#fff',
         fontFamily: 'Arial',
         wordWrap: { width: 500, useAdvancedWrap: true }
     });
 
-    // Mostrar las opciones de respuesta
-    var options = [currentQuestion.answer, "opcion2", "opcion3", "opcion4"]; // Reemplaza con opciones reales
-    Phaser.Utils.Array.Shuffle(options); // Mezclar las opciones
+    // Crear array de opciones incluyendo la respuesta correcta
+    var options = [...currentQuestion.options];
+    // Mezclar las opciones de forma aleatoria
+    //Phaser.Utils.Array.Shuffle(options);
+
 
     var optionTexts = [];
     for (let i = 0; i < options.length; i++) {
-        let optionText = scene.add.text(350, 275 + i * 75, options[i], { // Ajuste vertical y espaciado
+        let optionText = scene.add.text(350, 275 + i * 50, `${options[i].option}: ${options[i].text}`, {
             fontSize: '18px',
             fill: '#fff',
             fontFamily: 'Arial'
         });
 
-        optionTexts.push(optionText); // Guarda la referencia al texto de la opción
+        optionTexts.push(optionText);
     }
 
-    // Evento de teclado para seleccionar opciones
-    scene.input.keyboard.on('keydown', function (event) {
-        let key = event.key; // No es necesario convertir a mayúscula
+    // Desactivar las teclas de movimiento mientras la ventana de la pregunta está activa
+    if (keyboardActive) {
+        scene.input.keyboard.removeAllListeners();
+    }
 
-        if (key >= '1' && key <= '4') { // Verificar si es 1, 2, 3 o 4
-            let selectedOptionIndex = key.charCodeAt(0) - '1'.charCodeAt(0); // Obtener el índice de la opción (0, 1, 2 o 3)
+    // Captura de teclas para las opciones de respuesta (1, 2, 3, 4)
+    scene.input.keyboard.on('keydown-ONE', function() { handleAnswerSelection(0); });
+    scene.input.keyboard.on('keydown-TWO', function() { handleAnswerSelection(1); });
+    scene.input.keyboard.on('keydown-THREE', function() { handleAnswerSelection(2); });
+    scene.input.keyboard.on('keydown-FOUR', function() { handleAnswerSelection(3); });
 
-            if (selectedOptionIndex >= 0 && selectedOptionIndex < options.length) { // Verificar si el índice es válido
-                let selectedOption = options[selectedOptionIndex]; // Obtener la opción seleccionada
+    function handleAnswerSelection(index) {
+        let selectedOption = options[index];
+    
+        // Verificar respuesta
+        if (selectedOption.option === currentQuestion.answer) {
+            
 
-                // Lógica para verificar la respuesta y continuar el juego
-                if (selectedOption === currentQuestion.answer) {
-                    currentQuestionIndex++;
-
-                    // Obtener el puntaje actual del jugador
-                    var currentScore = player === player1 ? score1 : score2;
-
-                    // Incrementar el puntaje
-                    currentScore += 10; // Puedes ajustar la cantidad de puntos
-
-                    // Actualizar el puntaje del jugador
-                    if (player === player1) {
-                        score1 = currentScore;
-                        scoreText1.setText("Puntaje Jugador 1: " + score1);
-                    } else {
-                        score2 = currentScore;
-                        scoreText2.setText("Puntaje Jugador 2: " + score2);
-                    }
-
-                    if (currentQuestionIndex < shuffledQuestions.length) {
-                        scene.physics.resume(); // Reanudar la física *antes* de destruir elementos
-
-                        questionContainer.destroy();
-                        optionTexts.forEach(text => text.destroy());
-                        questionText.destroy();
-
-
-                        questionNumberText.setText("Pregunta " + (currentQuestionIndex + 1) + ":");
-                        createStars();
-                        bombCount++;
-                        createBomb();
-
-                        // Restablecer posición de los jugadores
-                        resetPlayerPosition(player);
-                    } else {
-                        questionNumberText.setText("¡Has completado el juego!");
-                        gameOver = true;
-                    }
-                } else {
-                    showGameOver(scene, "¡Respuesta incorrecta!");
-                    scene.physics.pause(); // Pausar la escena al responder incorrectamente
-                }
-                questionContainer.destroy();
-                optionTexts.forEach(text => text.destroy());
-                questionText.destroy();
+            // Actualizar el puntaje
+            if (player === player1) {
+                score1 += 10;
+                scoreText1.setText("Puntaje Jugador 1: " + score1);
+            } else {
+                score2 += 10;
+                scoreText2.setText("Puntaje Jugador 2: " + score2);
             }
+
+            // Si es la última pregunta, mostrar mensaje de fin del juego
+            if (currentQuestionIndex === shuffledQuestions.length - 1) {
+                showGameOver(scene, "¡Completaste el Juego!");
+                return;  // Detener la ejecución para evitar errores
+            }
+
+            // Avanzar a la siguiente pregunta
+            currentQuestionIndex++;
+            questionNumberText.setText("Pregunta " + (currentQuestionIndex + 1) + ":");
+
+            // Limpiar los objetos de la pantalla
+            questionContainer.destroy();
+            optionTexts.forEach(text => text.destroy());
+            questionText.destroy();
+
+            // Reanudar el juego
+            scene.physics.resume();
+            createStars();  // Generar nuevas estrellas
+            bombCount++;    // Aumentar el contador de bombas
+            createBomb();   // Crear nuevas bombas
+
+            resetPlayerPosition(player);  // Reiniciar la posición del jugador
+
+        } else {
+            // Si la respuesta es incorrecta, mostrar Game Over
+            showGameOver(scene, "¡Respuesta incorrecta!");
+            scene.input.keyboard.removeAllListeners();  // Deshabilitar las teclas
+            scene.physics.world.setPaused(true);  // Pausar el juego
         }
-    });
+
+        // Eliminar los objetos después de responder
+        questionContainer.destroy();
+        optionTexts.forEach(text => text.destroy());
+        questionText.destroy();
+
+        // Rehabilitar las teclas cuando la ventana se cierre
+        keyboardActive = false;
+        scene.input.keyboard.removeAllListeners();
+
+        // Reanudar el juego
+        scene.physics.resume();
+    }
 }
 
 // Función para restablecer la posición de un jugador
@@ -364,3 +389,18 @@ function showGameOver(scene, message) {
         gameOver = false;
     });
 }
+
+function collectStar(player, star) {
+    star.disableBody(true, true);
+    pauseGameAndShowQuestion(this, player); // Pasa el jugador a la función
+
+    // Si las preguntas están disponibles, mostrar la siguiente pregunta
+    if (questions.length > 0) {
+        showQuestion.call(this, currentQuestionIndex); // Mostrar la siguiente pregunta
+        currentQuestionIndex++; // Incrementar el índice para la siguiente pregunta
+        if (currentQuestionIndex >= questions.length) {
+            currentQuestionIndex = 0; // Si ya no hay más preguntas, reiniciar
+        }
+    } 
+}
+

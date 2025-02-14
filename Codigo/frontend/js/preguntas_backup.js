@@ -1,48 +1,20 @@
 
 function cargarPreguntas(){
-    /*fetch('http://localhost:3000/preguntas')
-    .then(response => response.text())
-    .then(text =>{
-        console.log("Respuesta del servidor", text);
-        return JSON.parse(text);
-    })
-    .then (response => response.json())
-    .then(preguntas => {
-        const questionContainer = document.getElementById('question-list');
-        questionContainer.innerHTML = '';
-
-        preguntas.forEach(pregunta =>{
-            const questionDiv = document.createElement('li');
-            questionDiv.className = 'question-item';
-            questionDiv.innerHTML = `
-                <h3>${pregunta.question}</h3>
-                <ul class="options">
-                    ${pregunta.options.map(opt =>
-                        `<li>${opt.option}. ${opt.text} ${opt.option === pregunta.answer ? '✓' : ''}</li>`
-                    ).join('')}
-                </ul>
-                <button class="delete-btn" onclick="eliminarPregunta('${pregunta._id}')">Eliminar</button>
-            `;
-                questionContainer.appendChild(questionDiv);
-        });
-    })*/
-    fetch('http://localhost:3000/preguntas')
-    .then(response => response.text())  // <-- Cambia a text() para ver la respuesta sin procesar
+    fetch('/preguntas')
+    .then(response => response.json())
     .then(data => {
         console.log("Respuesta del servidor:", data);  // <-- Muestra la respuesta en la consola
-        
+        const questionContainer = document.getElementById('question-list');
+        questionContainer.innerHTML = '';
         // Intenta convertir a JSON
         try {
             const preguntas = JSON.parse(data); 
-            const questionContainer = document.getElementById('question-list');
-            questionContainer.innerHTML = '';
-
             preguntas.forEach(pregunta => {
                 const questionDiv = document.createElement('li');
                 questionDiv.className = 'question-item';
                 questionDiv.innerHTML = `
                     <h3>${pregunta.question}</h3>
-                    <ul class="options">
+                    <ul>
                         ${pregunta.options.map(opt =>
                             `<li>${opt.option}. ${opt.text} ${opt.option === pregunta.answer ? '✓' : ''}</li>`
                         ).join('')}

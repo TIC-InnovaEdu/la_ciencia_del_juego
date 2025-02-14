@@ -1,0 +1,105 @@
+/* Estilo general para el body */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Estilo del header */
+header {
+    font-family: 'Poppins', sans-serif;
+    background-color: #308732; /* Color verde para el header */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Título del header */
+header h1 {
+    font-size: 28px;
+    margin: 0;
+}
+
+/* Estilo para el botón */
+button {
+    font-family: 'Poppins', sans-serif;
+    background-color: #743320; /* Naranja */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Efecto suave */
+}
+
+button:hover {
+    background-color: #612c1b; /* Naranja más oscuro al hacer hover */
+}
+
+/* Estilo para la sección */
+section {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de los encabezados de las instrucciones */
+h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    color: #272222;
+    font-size: 24px;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* Estilo de los párrafos */
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Mejoras en las listas numeradas */
+ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para el footer */
+footer {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-size: 14px;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Sombra en el footer */
+}
+
+/* Estilo de los enlaces */
+a {
+    color: #FF5722;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}

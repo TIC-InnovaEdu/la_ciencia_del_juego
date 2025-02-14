@@ -24,7 +24,14 @@ document.getElementById('register-form').addEventListener('submit', function(eve
         body: JSON.stringify({ nombre, apellido, email, clave})
         })
         .then(response => response.json())
-        .then(data => mostrarResultado('Ingreso satisfactorio',data))
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            }else{
+                alert('Registro exitoso.');
+                event.target.reset(); // Limpia el formulario
+            }
+        })
         .catch(error => console.error('Error:', error));
 });
 
@@ -48,6 +55,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     })
     .then(data => {
         alert('Inicio de sesión exitoso.');
+        window.location.href = "preguntas.html"; 
     })
     .catch(error => {
         console.error('Error:', error);

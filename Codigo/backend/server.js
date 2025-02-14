@@ -29,19 +29,23 @@ app.use( body_parser.urlencoded({extended:false}) )
 app.use(express.static(path.join(__dirname,'..', 'frontend')));
 
 // Your routes here
-app.get('/', (req, res) => {
+app.get('/principal', (req, res) => {
     res.sendFile(path.join(__dirname,'..', 'frontend', 'index.html'));
 });
 
-app.get('/page_prof', (req, res) => {
+app.get('/script', (req, res) => {
     res.sendFile(path.join(__dirname,'..', 'frontend', 'page_prof.html'));
 });
 
-app.get('/juego', (req, res) => {
+app.get('/instruccionepage', (req, res) => {
+    res.sendFile(path.join(__dirname,'..', 'frontend', 'instrucciones.html'));
+});
+
+app.get('/juego_script', (req, res) => {
     res.sendFile(path.join(__dirname,'..', 'frontend', 'juego.html'));
 });
 
-app.get('/preguntas', (req, res) => {
+app.get('/preguntasprof', (req, res) => {
     res.sendFile(path.join(__dirname,'..', 'frontend', 'preguntas.html'));
 });
 

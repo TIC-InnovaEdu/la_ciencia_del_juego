@@ -1,10 +1,12 @@
+/* Estilo general */
 body {
-    font-family: 'Josefin Sans', serif;
+    font-family: 'Josefin Sans', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
 
+/* Encabezado */
 header {
     display: flex;
     align-items: center;
@@ -22,30 +24,37 @@ header button {
     border-radius: 5px;
 }
 
-.main-container{
+/* Contenedor principal */
+.main-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 20px auto;
+    gap: 30px;
+    max-width: 1200px;
 }
 
+/* Contenedores */
 .container {
     background: #468c48;
     color: white;
-    /* margin: 20px auto; */
     padding: 20px;
-    width: 48%;
-    border-radius: 8px;
+    width: 60%;
+    border-radius: 10px;
     border: 2px solid white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
     border-bottom: 2px solid white;
     padding-bottom: 5px;
+    text-align: center;
 }
 
+/* Formulario */
 form {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 label {
@@ -53,70 +62,54 @@ label {
 }
 
 input[type="text"] {
-    padding: 5px;
+    padding: 8px;
     border-radius: 5px;
     border: none;
-    width: 70%;
+    width: 100%;
+    font-size: 1em;
 }
 
 .question-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     margin-bottom: 10px;
-    gap: 10px;
-    flex-wrap: wrap;
 }
 
-.question-item {    
-    background-color: #d10bdf00;
-    border: 2px solid #b85828f6;
-    border-radius: 4px;
+fieldset {
+    border: 2px solid white;
+    border-radius: 8px;
     padding: 10px;
-    margin-bottom: 10px;
-    font-size: 1.2em;
 }
 
-.question-item h3 {
-    margin: 0 0 10px 0;
+legend {
+    font-weight: bold;
 }
 
-.question-item .options {
-    margin: 10px 0;
-}
-
-.question-item .option {
-    margin-bottom: 5px;
-}
-
-.question-item button {
-    margin-right: 10px;
-}
-
+/* Opciones */
 .option-container {
     display: flex;
     align-items: center;
-    margin-top: 10px;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 8px;
 }
 
 .option-container label {
-    width: 15%;
+    min-width: 40px;
     text-align: right;
+    flex: 1;
 }
 
 .option-container input[type="text"] {
-    flex: 1;
-    margin-right: 10px;
+    flex: 3;
 }
 
-.option-container input[type="radio"] {
+.option-container input[type="checkbox"] {
     transform: scale(1.2);
 }
 
+/* Botón de crear pregunta */
 button {
-    font-family: 'Josefin Sans', serif;
-    margin-top: 15px;
+    font-family: 'Josefin Sans', sans-serif;
     padding: 10px;
     background: #81C784;
     color: white;
@@ -124,53 +117,64 @@ button {
     cursor: pointer;
     border-radius: 5px;
     transition: background 0.3s ease, transform 0.2s ease;
-}
-
-button, .container, li {
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
-    border-radius: 10px;  /* Bordes redondeados para un look más orgánico */
+    font-size: 1em;
+    text-align: center;
 }
 
 button:hover {
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Más sombra al hacer hover */
-    background: #66BB6A; /* Verde más brillante */
-    transform: scale(1.05);  /* Aumento suave de tamaño */
+    background: #66BB6A;
+    transform: scale(1.05);
 }
 
-/* Estilo para los botones de "Editar" y "Eliminar" */
-.edit-btn, .delete-btn {
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.edit-btn:hover, .delete-btn:hover {
-    background: #FFC107; /* Naranja para editar */
-    transform: scale(1.05);  /* Aumento suave de tamaño */
-}
-
-.delete-btn:hover {
-    background: #D32F2F; /* Rojo para eliminar */
-}
-
-ul {
+/* Preguntas ingresadas */
+#question-list {
     list-style: none;
     padding: 0;
 }
 
-li {
-    background: white;
+.question-item {
+    background-color: white;
     color: black;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    position: relative;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-li button {
-    margin-left: 10px;
+.question-item h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.question-item ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.question-item ul li {
+    padding-left: 10px;
     padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.question-item ul li:last-child {
+    border-bottom: none;
+}
+
+.question-item .correct {
+    font-weight: bold;
+    color: #388E3C;
+}
+
+/* Botones de acción */
+.edit-btn, .delete-btn {
+    padding: 8px;
     border: none;
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .edit-btn {
@@ -181,4 +185,12 @@ li button {
 .delete-btn {
     background: #D32F2F;
     color: white;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    transform: scale(1.05);
+}
+
+.delete-btn:hover {
+    background: #B71C1C;
 }
