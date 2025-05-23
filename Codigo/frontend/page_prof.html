@@ -3,40 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login y Registro</title>
-    <link rel="stylesheet" href="css/page_prof.css">
+    <title>Reserva de Entradas - Cine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        select, input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+    </style>
 </head>
-<body background="img/plus.jpg" >
-    <div class="barra">La ciencia del juego</div> <!-- Barra encima de la imagen -->
-    
-    <div class="logo">
-        <img src="img/UPS.webp" alt="Universidad Politécnica Salesiana">
+<body>
+    <h1>Reserva tu Entrada</h1>
+    <div class="container">
+        <label>Selecciona la película:</label>
+        <select id="pelicula">
+            <option value="The Creator">The Creator</option>
+            <option value="Five Nights at Freddy's">Five Nights at Freddy's</option>
+            <option value="Oppenheimer">Oppenheimer</option>
+        </select>
+
+        <label>Selecciona la fecha:</label>
+        <input type="date" id="fecha">
+
+        <label>Selecciona la hora:</label>
+        <select id="hora">
+            <option value="14:00">14:00</option>
+            <option value="17:00">17:00</option>
+            <option value="20:00">20:00</option>
+        </select>
+
+        <label>Selecciona la cantidad de asientos:</label>
+        <input type="number" id="asientos" min="1" max="10">
+
+        <label>Ingrese su número de tarjeta:</label>
+        <input type="text" id="tarjeta" placeholder="**** **** **** ****">
+        
+        <button onclick="reservarEntrada()">Comprar Entrada</button>
     </div>
 
-    <div class="container">
-        <div class="form-container" id="login-container">
-            <h2>Iniciar Sesión</h2>
-            <form id="login-form">
-                <input type="email" id="login-email" placeholder="Correo Electrónico" required>
-                <input type="password" id="login-password" placeholder="Contraseña" required>
-                <button type="submit">Ingresar</button>
-            </form>
-            <p>¿No tienes una cuenta? <a href="#" id="show-register">Regístrate</a></p>
-        </div>
+    <h2>Resumen de Reservas</h2>
+    <div id="resumen" class="container"></div>
+
+    <h2>Reporte de Ventas</h2>
+    <div id="reporte" class="container"></div>
+
+    <script>
+        let ventas = [];
         
-        <div class="form-container hidden" id="register-container">
-            <h2>Registro de Profesor</h2>
-            <form id="register-form">
-                <input type="text" id="register-name" placeholder="Nombre" required>
-                <input type="text" id="register-lastname" placeholder="Apellido" required>
-                <input type="email" id="register-email" placeholder="Correo Electrónico" required>
-                <input type="password" id="register-password" placeholder="Contraseña" required>
-                <button type="submit">Registrar</button>
-            </form>
-            <p>¿Ya tienes una cuenta? <a href="#" id="show-login">Inicia Sesión</a></p>
-        </div>
-    </div>
-    
-    <script src="js/script.js"></script>
+        function reservarEntrada() {
+            let pelicula = document.getElementById("pelicula").value;
+            let fecha = document.getElementById("fecha").value;
+            let hora = document.getElementById("hora").value;
+            let asientos = document.getElementById("asientos").value;
+            let tarjeta = document.getElementById("tarjeta").value;
+
+            if (!fecha || !asientos || !tarjeta) {
+                alert("Por favor, completa todos los campos");
+                return;
+            }
+
+            let reserva = {
+                pelicula,
+                fecha,
+                hora,
+                asientos: parseInt(asientos)
+            };
+
+            ventas.push(reserva);
+            actualizarResumen();
+            actualizarReporte();
+            alert("Reserva exitosa para " + pelicula);
+        }
+
+        function actualizarResumen() {
+            let resumen = document.getElementById("resumen");
+            resumen.innerHTML = ventas.map(r => 
+                `<p>${r.asientos} asientos reservados para ${r.pelicula} el ${r.fecha} a las ${r.hora}</p>`
+            ).join('');
+        }
+
+        function actualizarReporte() {
+            let reporte = document.getElementById("reporte");
+            let reporteDiario = {};
+            
+            ventas.forEach(r => {
+                let key = `${r.fecha} - ${r.pelicula}`;
+                if (!reporteDiario[key]) {
+                    reporteDiario[key] = 0;
+                }
+                reporteDiario[key] += r.asientos;
+            });
+            
+            reporte.innerHTML = Object.entries(reporteDiario).map(entry => 
+                `<p>${entry[0]}: ${entry[1]} boletos vendidos</p>`
+            ).join('');
+        }
+    </script>
 </body>
 </html>

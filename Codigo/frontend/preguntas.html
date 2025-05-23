@@ -3,12 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Preguntas</title>
+    <title>Verificación de Ventas de Boletos</title>
     <link rel="stylesheet" href="css/preguntas.css">
     <meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com https://fonts.googleapis.com;">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap" rel="stylesheet">
+    <style>
+        header {
+            background-color: #87CEEB; /* Celeste */
+            padding: 10px;
+            text-align: left;
+        }
+        button {
+            background-color: #87CEEB; /* Celeste */
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .container {
+            background-color: #4CAF50;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            margin-bottom: 10px;
+        }
+        #sales-info {
+            min-height: 50px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid white;
+        }
+        input, select {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        .sales-container {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .sales-container h3 {
+            color: #333;
+        }
+        .sales-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sales-container li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -16,48 +67,101 @@
     </header>
 
     <div class="main-container">
+        <!-- Formulario de Compra -->
         <div class="container">
-            <form id="question-form">
+            <form id="movie-form">
                 <div class="question-container">
-                    <label for="question">Pregunta:</label>
-                    <input type="text" id="question" required>
+                    <label for="movie">Selecciona una película:</label>
+                    <select id="movie" required>
+                        <option value="pelicula1">Película 1</option>
+                        <option value="pelicula2">Película 2</option>
+                        <option value="pelicula3">Película 3</option>
+                    </select>
                 </div>
-    
-                <fieldset>
-                    <legend>Opciones</legend>
-                    <div class="option-container">
-                        <label for="option1">Opción A:</label>
-                        <input type="text" id="option1" class="option" required>
-                        <input type="checkbox" id="correct1"> Correcta
-                    </div>
-                    <div class="option-container">
-                        <label for="option2">Opción B:</label>
-                        <input type="text" id="option2" class="option" required>
-                        <input type="checkbox" id="correct2"> Correcta
-                    </div>
-                    <div class="option-container">
-                        <label for="option3">Opción C:</label>
-                        <input type="text" id="option3" class="option" required>
-                        <input type="checkbox" id="correct3"> Correcta
-                    </div>
-                    <div class="option-container">
-                        <label for="option4">Opción D:</label>
-                        <input type="text" id="option4" class="option" required>
-                        <input type="checkbox" id="correct4"> Correcta
-                    </div>
-                </fieldset>
-    
-                <button type="button" onclick="crearPreguntas()">Crear Pregunta</button>
-                
+                <div class="question-container">
+                    <label for="fecha">Fecha de la función:</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                <div class="question-container">
+                    <label for="asientos">Selección de asientos:</label>
+                    <select id="asientos" required>
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="A3">A3</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                    </select>
+                </div>
+                <button type="button" onclick="registrarVenta()">Registrar Venta</button>
             </form>
         </div>
-    
-        <div class="container">
-            <h2>Preguntas Ingresadas</h2>
-            <ul id="question-list"></ul>
-        </div>   
+
+        <!-- Información de ventas para el Cajero -->
+        <div class="container" id="sales-container">
+            <h2>Ventas de Boletos</h2>
+            <div id="sales-info"></div>
+        </div>
     </div>
 
-    <script src="js/preguntasprof.js"></script>
+    <script>
+        const ventas = {}; // Objeto para almacenar las ventas por película y fecha
+
+        function registrarVenta() {
+            const pelicula = document.getElementById("movie").value;
+            const fecha = document.getElementById("fecha").value;
+            const asientos = document.getElementById("asientos").value;
+
+            if (pelicula && fecha && asientos) {
+                // Crear un identificador único para la venta
+                const ventaId = `${pelicula}-${fecha}`;
+                
+                // Verificar si ya existe un registro para esta película y fecha
+                if (!ventas[ventaId]) {
+                    ventas[ventaId] = { pelicula, fecha, boletosVendidos: 0, asientos: [] };
+                }
+
+                // Incrementar los boletos vendidos y agregar el asiento
+                ventas[ventaId].boletosVendidos++;
+                ventas[ventaId].asientos.push(asientos);
+
+                // Mostrar la información de ventas
+                mostrarVentas();
+
+                // Limpiar el formulario después de registrar
+                document.getElementById("movie-form").reset();
+            } else {
+                alert("Por favor, completa todos los campos.");
+            }
+        }
+
+        // Mostrar las ventas registradas
+        function mostrarVentas() {
+            const listContainer = document.getElementById("sales-info");
+            listContainer.innerHTML = ""; // Limpiar contenido anterior
+
+            for (const ventaId in ventas) {
+                const venta = ventas[ventaId];
+                
+                const div = document.createElement("div");
+                div.classList.add("sales-container");
+
+                const h3 = document.createElement("h3");
+                h3.textContent = `Película: ${venta.pelicula} - Fecha: ${venta.fecha}`;
+                div.appendChild(h3);
+
+                const ul = document.createElement("ul");
+                const li1 = document.createElement("li");
+                li1.textContent = `Boletos vendidos: ${venta.boletosVendidos}`;
+                ul.appendChild(li1);
+
+                const li2 = document.createElement("li");
+                li2.textContent = `Asientos ocupados: ${venta.asientos.join(", ")}`;
+                ul.appendChild(li2);
+
+                div.appendChild(ul);
+                listContainer.appendChild(div);
+            }
+        }
+    </script>
 </body>
 </html>
